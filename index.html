@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博士还是偶像？</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #555;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .question input, .question select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .result {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>博士还是偶像？</h1>
+        <div class="question">
+            <label for="passion">你对学术研究的热情程度（1-10）：</label>
+            <input type="number" id="passion" min="1" max="10" value="5">
+        </div>
+        <div class="question">
+            <label for="performance">你对舞台表演的热情程度（1-10）：</label>
+            <input type="number" id="performance" min="1" max="10" value="5">
+        </div>
+        <div class="question">
+            <label for="patience">你的耐心程度（1-10）：</label>
+            <input type="number" id="patience" min="1" max="10" value="5">
+        </div>
+        <div class="question">
+            <label for="age">你的年龄：</label>
+            <input type="number" id="age" min="10" max="50" value="20">
+        </div>
+        <div class="question">
+            <label for="risk">你愿意承担的风险程度（1-10）：</label>
+            <input type="number" id="risk" min="1" max="10" value="5">
+        </div>
+        <button onclick="calculateDecision()">做出决定！</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateDecision() {
+            // 获取用户输入
+            const passion = parseInt(document.getElementById('passion').value);
+            const performance = parseInt(document.getElementById('performance').value);
+            const patience = parseInt(document.getElementById('patience').value);
+            const age = parseInt(document.getElementById('age').value);
+            const risk = parseInt(document.getElementById('risk').value);
+
+            // 计算得分
+            const academicScore = passion + patience + (age < 30 ? 2 : 0);
+            const idolScore = performance + risk + (age < 25 ? 3 : 0);
+
+            // 生成建议
+            let resultText = '';
+            if (academicScore > idolScore) {
+                resultText = '建议你继续读博士！🎓';
+            } else if (idolScore > academicScore) {
+                resultText = '建议你出道当偶像！🌟';
+            } else {
+                resultText = '你可以两者兼顾，或者再仔细考虑一下！🤔';
+            }
+
+            // 显示结果
+            document.getElementById('result').innerText = resultText;
+        }
+    </script>
+</body>
+</html>
